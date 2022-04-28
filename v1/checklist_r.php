@@ -12,24 +12,22 @@ if ($con->connect_error)
 {
 	exit('Falha ao conectar ao MySQL: ' . $con->connect_error);
 }
-$checkbox = $_POST['chk1'];
-if($_POST["salvar"]=="salvar"){
-    for ($i=0; $i<sizeof($checkbox); $i++){
 
-        $con->prepare("INSERT INTO checklist(Sinaleiro, Extintor, CintodeSeguranca, Buzina, NiveldeOleodoMotor, NiveldeAguadoRadiador, Pintura, TravadoCilindrodeGas, AlinhamentodosGarfos, Banco, ChaveFrenteRe, Mangueiras, Correntes, EstruturasdaMaquina, ChecarAnormalidade, LimpezadoEquipamento, Direcao, Aceleracao, Freio, FuncaoHidraulica, BarulhosAnormais) 
-        VALUES ('".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "', '".$checkbox[$i]. "')" );
-    }
-}
-$stmt = $con->prepare("INSERT INTO checklist(EmpilhadeiraNumero, Turno, OperadorResponsavel, HorimetroInicial, Observacoes, data) 
-VALUES (?, ?, ?, ?, ?, ?)");
-
-$stmt->bind_param("ssssss", $empilhadeira, $turno, $username, $Horimetro, $obs, $data);
+$elementos = $_POST['elementos'];
 $empilhadeira = $_POST['empilhadeira'];
 $turno = $_POST['turno'];
 $username = $_POST['username'];
 $Horimetro = $_POST['Horimetro'];
+
 $obs = $_POST['obs'];
 $data = $_POST['data'];
+
+$string = implode("', '",$elementos); 
+
+$insert = "INSERT INTO checklist(EmpilhadeiraNumero, Turno, OperadorResponsavel, HorimetroInicial, Sinaleiro, Extintor, CintodeSeguranca, Buzina, NiveldeOleodoMotor, NiveldeAguadoRadiador, Pintura, TravadoCilindrodeGas, AlinhamentodosGarfos, Banco, ChaveFrenteRe, Mangueiras, Correntes, EstruturasdaMaquina, ChecarAnormalidade, LimpezadoEquipamento, Direcao, Aceleracao, Freio, FuncaoHidraulica, BarulhosAnormais, Observacoes, data) 
+VALUES ('$empilhadeira', '$turno', '$username', '$Horimetro', '$string', '$obs', '$data')";
+
+$stmt = $con->prepare($insert);
 
 $stmt->execute();
         
@@ -41,6 +39,6 @@ echo "Salvo Com Sucesso!";
     </form>
 <?php
 
-$stmt->close();
+#$stmt->close();
 $con->close();
 ?>
