@@ -11,7 +11,7 @@ if ( mysqli_connect_errno() ) {
 	exit('Falha ao conectar ao MySQL: ' . mysqli_connect_error());
 }
 
-if ( !isset($_POST['username'], $_POST['password']) ) {
+if ( !isset($_SESSION['name'], $_SESSION['password']) ) {
 
     echo 'Por favor preencha os campos de Nome e Senha!';
     ?>
@@ -20,22 +20,7 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
         </form>
     <?php
 }
-
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
-	$stmt->bind_param('s', $_POST['username']);
-	$stmt->execute();
-
-	$stmt->store_result();
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $password);
-        $stmt->fetch();
-
-        if ($_POST['password'] === $password) {
-            session_regenerate_id();
-            $_SESSION['loggedin'] = TRUE;
-            $_SESSION['name'] = $_POST['username'];
-            $_SESSION['id'] = $id;
-
+          
             ?>
             
             <!DOCTYPE html>
@@ -54,6 +39,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
                 <img class="img" src="Motherson_Logo-hori-Dark-Background-PNG.png"  >
                 <h2 class="titulo-principal">CheckList</h2>
             </header>
+            
             <?php
                 $operador = $_SESSION['name'];
             ?>
@@ -110,26 +96,5 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 
 
 <?php
-        } else {
-            echo 'Nome e/ou Senha incorretas!';
-            ?>
-            <br>
-            <br>
-            <form action="index.html" method="post">
-                <button type="submit" name="voltar" class="btn btn-primary">Voltar</button>
-            </form>
-            <?php
-        }
-    } else {
-        echo 'Nome e/ou Senha incorretas!';
-        ?>
-        <br>
-        <br>
-        <form action="index.html" method="post">
-            <button type="submit" name="voltar" class="btn btn-primary">Voltar</button>
-        </form>
-        <?php
-    }
-	$stmt->close();
-}
+
 ?>

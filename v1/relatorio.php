@@ -29,7 +29,7 @@ $result = $con->query($sql);
 if ($result->num_rows > 0) {
   echo "<table class='table' border=1><tr class='info'><th>Data</th><th>Número da Empilhaderia</th><th>Turno</th>
   <th>Operador Responsável</th><th>Horimetro Inicial</th>
-  <th>Sinaleiro/Giofles/Farol</th><th>Extintor</th>
+  <th>Sinaleiro/Girofles/Farol</th><th>Extintor</th>
   <th>Cinto de Segurança</th><th>Buzina</th>
   <th>Nível de Óleo do Motor</th><th>Nível de Água do Radiador</th>
   <th>Pintura</th><th>Trava do Cilindro de Gás</th>

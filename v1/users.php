@@ -11,9 +11,23 @@ if ( mysqli_connect_errno() ) {
 	exit('Falha ao conectar ao MySQL: ' . mysqli_connect_error());
 }
 
-$sql = "SELECT username, password FROM accounts";
-$result = $con->query($sql);
+if ( !isset($_SESSION['name'], $_SESSION['password']) ) {
+
+    echo 'Por favor preencha os campos de Nome e Senha!';
+    
+    ?>
+        <form action="index.html" method="post">
+            <button type="submit" name="voltar" class="btn btn-primary">Voltar</button>
+        </form>
+    <?php
+    
+}
+
+if($_SESSION['name'] === "administrador") {
+  $sql = "SELECT username, password FROM accounts";
+  $result = $con->query($sql);
 ?>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="temp.css">
 <header class="barra">
@@ -40,4 +54,28 @@ if ($result->num_rows > 0) {
 <?php
 
 $con->close();
+
+        } else {
+          ?>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <link rel="stylesheet" href="temp.css">
+          <header class="barra">
+          <img class="img" src="Motherson_Logo-hori-Dark-Background-PNG.png"  >
+          <h2 class="titulo-principal">Usuários</h2>
+          </header>
+          <div class="form-group" style="text-align: center;">
+          <?php 
+            echo 'Usuário não tem permissão necessária!';
+            ?>
+            <br>
+            <br>
+            <form action="index.html" method="post">
+                <button type="submit" name="voltar" class="btn btn-primary">Voltar</button>
+            </form>
+            </div>
+            <?php
+          
+            
+        }
+
 ?>
