@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="style.css">
 <?php
 session_start();
 $DATABASE_HOST = 'localhost';
@@ -14,16 +13,31 @@ if ( mysqli_connect_errno() ) {
 
 $sql = "SELECT username, password FROM accounts";
 $result = $con->query($sql);
-
+?>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="temp.css">
+<header class="barra">
+    <img class="img" src="Motherson_Logo-hori-Dark-Background-PNG.png"  >
+    <h2 class="titulo-principal">Usuários</h2>
+</header>
+<div class="form-group" style="text-align: center;">
+<?php
 if ($result->num_rows > 0) {
-  echo "<table><tr><th>Nome</th><th>Senha</th></tr>";
+  echo "<table class='table' border=1><tr class='info'><th>Nome</th><th>Senha</th></tr>";
 
   while($row = $result->fetch_assoc()) {
-    echo "<tr><td>".$row["username"]."</td><td>".$row["password"]."</td></tr>";
+    echo "<tr class='active'><td>".$row["username"]."</td><td>".$row["password"]."</td></tr>";
   }
   echo "</table>";
 } else {
   echo "0 results";
 }
+?>
+<br>
+<button type="submit" name="voltar" class="btn btn-primary">Registrar mais usuários</button>
+</div>
+
+<?php
+
 $con->close();
 ?>

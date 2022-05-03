@@ -1,0 +1,27 @@
+.barra {
+    background-color: rgba(218, 33, 40, 238);
+    position: relative;
+    padding: 1rem;
+}
+
+.img {
+    position: absolute;
+    max-width: 200px;
+    top: -45px;
+    left: 10px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.titulo-principal {
+  font-size: "Open Sans Condensed", "Arial", sans-serif;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 50%;
+  color: white;
+}

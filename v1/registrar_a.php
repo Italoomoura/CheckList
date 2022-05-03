@@ -15,16 +15,21 @@ if (mysqli_connect_errno())
 
 extract($_POST);
 
-$sql=mysqli_query($con,"SELECT * FROM accounts WHERE username = '$username'");
+$sql=mysqli_query($con,"SELECT username FROM accounts WHERE username = '$username'");
 if(mysqli_num_rows($sql)>0)
 {
     echo "usuário já existe"; 
+    ?>
+    <form action="registrar.php" method="post">
+        <button type="submit" name="voltar" class="btn btn-primary">Voltar</button>
+    </form>
+    <?php
 	exit;
 }
 
 else if(isset($_POST['save']))
 {  
-    $sql=mysqli_query($con,"INSERT INTO accounts(username, Password) VALUES ('$username', '$password')")or die("Could Not Perform the Query");
+    $sql=mysqli_query($con,"INSERT INTO accounts(nome, username, Password) VALUES ('$nome', '$username', '$password')")or die("Could Not Perform the Query");
     header ("Location: users.php?status=success");
 }
 

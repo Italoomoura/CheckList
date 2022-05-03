@@ -16,9 +16,18 @@ $sql = "SELECT data, EmpilhadeiraNumero, Turno, OperadorResponsavel, HorimetroIn
 TravadoCilindrodeGas, AlinhamentodosGarfos, Banco, ChaveFrenteRe, Mangueiras, Correntes, EstruturasdaMaquina, ChecarAnormalidade, LimpezadoEquipamento, Direcao, Aceleracao, Freio, 
 FuncaoHidraulica, BarulhosAnormais, Observacoes FROM checklist";
 $result = $con->query($sql);
+?>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="temp.css">
+<header class="barra">
+    <img class="img" src="Motherson_Logo-hori-Dark-Background-PNG.png"  >
+    <h2 class="titulo-principal">Relatório</h2>
+</header>
+<div class="form-group" style="text-align: center;">
+<?php
 if ($result->num_rows > 0) {
-  echo "<table border=1><tr><th>Data</th><th>Número da Empilhaderia</th><th>Turno</th>
+  echo "<table class='table' border=1><tr class='info'><th>Data</th><th>Número da Empilhaderia</th><th>Turno</th>
   <th>Operador Responsável</th><th>Horimetro Inicial</th>
   <th>Sinaleiro/Giofles/Farol</th><th>Extintor</th>
   <th>Cinto de Segurança</th><th>Buzina</th>
@@ -33,7 +42,7 @@ if ($result->num_rows > 0) {
   <th>Barulhos Anormais</th><th>Observações</th></tr>";
 
   while($row = $result->fetch_assoc()) {
-    echo "<tr><td>".$row["data"]."</td><td>".$row["EmpilhadeiraNumero"]."</td><td>".$row["Turno"]."</td>
+    echo "<tr class='active'><td>".$row["data"]."</td><td>".$row["EmpilhadeiraNumero"]."</td><td>".$row["Turno"]."</td>
     <td>".$row["OperadorResponsavel"]."</td><td>".$row["HorimetroInicial"]."</td><td>".$row["Sinaleiro"]."</td>
     <td>".$row["Extintor"]."</td><td>".$row["CintodeSeguranca"]."</td><td>".$row["Buzina"]."</td>
     <td>".$row["NiveldeOleodoMotor"]."</td><td>".$row["NiveldeAguadoRadiador"]."</td><td>".$row["Pintura"]."</td>
@@ -47,5 +56,8 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
+?>
+</div>
+<?php
 $con->close();
 ?>

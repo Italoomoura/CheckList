@@ -17,28 +17,34 @@ $DATABASE_NAME = 'db_contact';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Registrar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="temp.css">
 </head>
 <body>
-<body>
-<div class="resgistrar-form">
+    <header class="barra">
+        <img class="img" src="Motherson_Logo-hori-Dark-Background-PNG.png"  >
+        <h2 class="titulo-principal">Registrar</h2>
+    </header>
+    <div class="form-group" style="text-align: center;">
+    
     <form action="registrar_a.php" method="post">
-		<h2>Registrar</h2>
-		<p class="hint-text">Criar nova conta</p>
-        <div>
-			<div class="row">
-				<div class="col"><input type="text" class="form-control" name="username" placeholder="Nome" required="required"></div>
-			</div>        	
-        </div>
+		<h2 class="hint-text">Criar nova conta</h2>
+		<div class="row">
+			<div class="col"><input type="text"  name="nome" placeholder="Nome" required="required"></div>
+		</div> 
+        <div class="row">
+			<div class="col"><input type="text" name="username" placeholder="Usuário" required="required"></div>
+		</div>        	
 		<div>
-            <input type="text" class="form-control" name="password" placeholder="Senha" required="required">
+            <input type="text"  name="password" placeholder="Senha" required="required">
         </div>
         <br> 
 		<div>
-            <button type="submit" name="save" class="btn btn-success btn-lg btn-block">Registrar</button>
+            <button type="submit" name="save" class="btn btn-primary">Registrar</button>
         </div>
     </form>
-</div>
+    
+    </div>
 </body>
 </html>
